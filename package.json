@@ -1,0 +1,40 @@
+{
+  "name": "contactkeeperafd",
+  "version": "1.0.0",
+  "description": "Contact Keeper application which is more or less fullstack",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AF3204/contactKeeperAfd.git"
+  },
+  "keywords": [
+    "contact-keeper",
+    "afd",
+    "learning",
+    "reactjs",
+    "expressjs",
+    "mongoDB",
+    "mern"
+  ],
+  "author": "Ahmad Faizal + Brad Traversy (Teacher)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AF3204/contactKeeperAfd/issues"
+  },
+  "homepage": "https://github.com/AF3204/contactKeeperAfd#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.3"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.12"
+  }
+}
