@@ -6,7 +6,14 @@ const router = express.Router();
 // @access      Public
 // @param       NULL
 router.post('/',(req, res)=>{
-    res.json({
-        message:'Register a user'
-    })
+    // res.json({
+    //     message:'Register a user'
+    // })
+    res.send('Register a user')
 })
+
+// router.get('/',(req,res)=>{
+
+// })
+
+module.exports = router;
