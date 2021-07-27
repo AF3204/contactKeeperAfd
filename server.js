@@ -13,6 +13,9 @@ const PORT = process.env.PORT || 5050
 // 20210726: Connect to DB
 connectDB()
 
+// 20210727: Init middleware
+app.use(express.json({extended: false}));
+
 // First GET request
 app.get('/',(req, res)=>{
     res.json({
