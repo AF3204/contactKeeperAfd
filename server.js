@@ -3,11 +3,15 @@
  * Using ES6 module
  */
 const express = require('express')
+const connectDB = require('./config/db.js')
 
 // Initialising the app
 const app = express()
 // Initialising the PORT -> If not found: 5050
 const PORT = process.env.PORT || 5050
+
+// 20210726: Connect to DB
+connectDB()
 
 // First GET request
 app.get('/',(req, res)=>{
