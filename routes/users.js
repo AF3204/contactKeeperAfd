@@ -29,30 +29,61 @@ router.post('/',
         }),
 ],
 async(req, res)=>{
-    try{
-        // res.json({
-        //     message:'Register a user'
-        // })
-        // 20210727: Validating the results
-        const errors = validationResult(req)
+    
+    // res.json({
+    //     message:'Register a user'
+    // })
+    // 20210727: Initialising the constants
+    const {
+        name,
+        email,
+        password
+    } = req.body
 
-        if(!errors.isEmpty()){
+    // 20210727: Validating the results
+    const errors = validationResult(req)
+    
+    // 20210727: Check for errors before continuing
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            msg:errors.array()
+        })
+    }
+
+    try{
+        // 20210727: Check if the user exist by unique email.
+        let user = await User.findOne({email})
+        
+        if(user){
             return res.status(400).json({
-                msg:errors.array()
+                msg: `Email ${email} has already been used`
             })
         }
 
-        const {
+        // 20210727: Initialise new users before saving
+        user = new User({
             name,
             email,
             password
-        } = req.body
+        })
+
+        // 20210727: Using bcrypt to generate salt
+        const salt = await bcrypt.genSalt(10);
+
+        // 20210727: Using bcrypt to hash password
+        user.password = await bcrypt.hash(password,salt)
+
+        // 20210727: If all is ok, save
+        await user.save()
 
         res.status(200).json({
-            msg:req.body
+            msg:`User ${name} with email->(${email}) has been CREATED`
         })
     }catch(err){
         console.log(err);
+        res.status(500).json({
+            msg:`Could not create new User ${name}`
+        })
     }
 })
 
