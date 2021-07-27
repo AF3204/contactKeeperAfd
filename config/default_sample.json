@@ -1,3 +1,4 @@
 {
-    "mongoURI": "Get from the MongoDB Cloud"
+    "mongoURI": "Get from the MongoDB Cloud",
+    "jwt":"Some secret code but you can also use an ENV file"
 }

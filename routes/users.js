@@ -6,6 +6,9 @@ const User = require('../model/User.js')
 const {check,validationResult} = require('express-validator')
 // 20210727: Encryption
 const bcrypt = require('bcryptjs')
+// 20210727: JWT
+const jwt = require('jsonwebtoken')
+const config = require('config')
 
 // @route       POST api/users
 // @desc        Register a user
@@ -75,6 +78,26 @@ async(req, res)=>{
 
         // 20210727: If all is ok, save
         await user.save()
+
+        // 20210727: Creating payload
+        const payload ={
+            user:{
+                id:user.id
+            }
+        }
+
+        // 20210727: Saving into the JWT
+        jwt.sign(payload,
+                 config.get('jwt'),
+                 {
+                    expiresIn: 3600
+                 },
+                 (err,token)=>{
+                    //  If error
+                     if(err) throw err;
+                    //  else
+                     res.json({token})
+                 });
 
         res.status(200).json({
             msg:`User ${name} with email->(${email}) has been CREATED`
