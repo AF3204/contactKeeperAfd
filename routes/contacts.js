@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
+// 20210802: Getting the User table from mongoDb
+const User = require('../model/User.js')
+const Contact = require('../model/Contact.js')
+// 20210802: ExpressJS validator
+const {check,validationResult} = require('express-validator')
+// 20210802: Auth
+const auth = require('../middleware/auth.js')
 
-// @route       POST api/contact
+// @route       GET api/contact
 // @desc        Get user contacts
 // @access      Private
 // @param       user
