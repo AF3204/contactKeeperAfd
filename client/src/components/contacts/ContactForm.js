@@ -1,10 +1,31 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import ContactContext from '../../context/contact/contactContext'
 
 const ContactForm = () => {
     // Using Context
     const contactContext = useContext(ContactContext);
+    // 20210806 - Destructuring
+    const {addContact, updateContact, clearCurrent, current} = contactContext
     
+    /**
+     * 20210806 - useEffect -> This hook will check if current has been changed
+     * 20210806 - Add dependencies at the end, so that only when it happens
+     *            that we do the edit etc
+     */
+    useEffect(()=>{
+        if(current !== null){
+            setContact(current)
+        }else{
+            // 20210806 - Nullify if current is empty
+            setContact({
+                name:'',
+                email:'',
+                phone:'',
+                type:'personal'
+            })
+        }
+    }, [contactContext, current])
+
     // Setting the state to detect changes as well as the default state
     const [contact, setContact] = useState({
         name:'',
@@ -22,13 +43,28 @@ const ContactForm = () => {
         ...contact,
         [e.target.name]: e.target.value
     })
-    
+
+    /**
+     * 20210806 - Clear All functionality
+     */
+    const clearAll = () =>{
+        clearCurrent()
+    }
+
+
     // OnSubmit -> send to context
     const onSubmit = e =>{
         // No default submission
         e.preventDefault()
         // Using Context
-        contactContext.addContact(contact)
+        // addContact(contact)
+        // 20210806 - Update if current is not null
+        if(current !== null){
+            updateContact(contact)
+            clearCurrent()
+        }else{
+            addContact(contact)
+        }
         // Once send, we reset
         setContact({
             name:'',
@@ -41,7 +77,9 @@ const ContactForm = () => {
     return (
         <form onSubmit={onSubmit}>
         <h2 className='text-primary'>
-            Add Contact
+            {/* 20210806 - Changing from static title to Dynamic title */}
+            {/* Add Contact */}
+            {current ? 'Edit Contact' : 'Add Contact'}
         </h2>
         <input
             type='text'
@@ -68,27 +106,30 @@ const ContactForm = () => {
         <input
             type='radio'
             name='type'
-            value='personal'
-            checked={type === 'personal'}
+            value='Personal'
+            checked={type === 'personal' || type === 'Personal'}
             onChange={onChange}
         />{' '}
         Personal{' '}
         <input
             type='radio'
             name='type'
-            value='professional'
-            checked={type === 'professional'}
+            value='Professional'
+            checked={type === 'professional' || type === 'Professional'}
             onChange={onChange}
         />{' '}
         Professional
         <div>
+            {/* 20210806 - Submit title changes as well */}
             <input
             type='submit'
-            value={'Add Contact'}
+            value={current ? 'Edit Contact' : 'Add Contact'}
             className='btn btn-primary btn-block'
             />
         </div>
-        
+            {current && <div>
+                <button className='btn btn-light btn-block' onClick={clearAll}>Clear All</button>
+            </div>}
         </form>
     )
 }
