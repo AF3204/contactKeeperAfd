@@ -13,7 +13,13 @@ import {
 } from '../types.js'
 
 const ContactState = (props) =>{
-
+    /**
+     * 20210806: Current is set to an empty value
+     * Current is part of the Edit feature
+     * Any Edits will be stored in the current
+     *  */ 
+    // 20210806: 
+    // 20210806:  
     const initialState = {
         contacts:[
             {
@@ -37,8 +43,12 @@ const ContactState = (props) =>{
                 phone:'0127656783',
                 type:'Professional',
             }
-        ]
+        ],
+        current: null
     }
+
+    // 20210806 - To view the content in the current
+    // console.log(initialState.current);
 
     const [state, dispatch] = useReducer(contactReducer, initialState)
     
@@ -48,11 +58,17 @@ const ContactState = (props) =>{
       dispatch({type:ADD_CONTACT,payload:contact})
     }
     // Delete Contact
-
+    const deleteContact = id =>{
+      dispatch({type:DELETE_CONTACT,payload:id})
+    }
     // Set Contact
-
+    const setCurrent = current =>{
+      dispatch({type:SET_CURRENT,payload:current})
+    }
     // Clear current contact
-
+    const clearCurrent = () =>{
+      dispatch({type:CLEAR_CURRENT})
+    }
     // Update Contact
 
     // Filter Contacts
@@ -63,7 +79,11 @@ const ContactState = (props) =>{
         <ContactContext.Provider
           value={{
             contacts: state.contacts,
-            addContact
+            current: state.current,
+            addContact,
+            deleteContact,
+            setCurrent,
+            clearCurrent
           }}
         >
           {props.children}
