@@ -18,8 +18,10 @@ const ContactState = (props) =>{
      * Current is part of the Edit feature
      * Any Edits will be stored in the current
      *  */ 
-    // 20210806: 
-    // 20210806:  
+    /**
+     * 20210808: Adding the Filtering feature
+     *  Filtered is to filter out contacts based on given inputs
+     */
     const initialState = {
         contacts:[
             {
@@ -44,7 +46,8 @@ const ContactState = (props) =>{
                 type:'Professional',
             }
         ],
-        current: null
+        current: null,
+        filtered:null
     }
 
     // 20210806 - To view the content in the current
@@ -73,20 +76,30 @@ const ContactState = (props) =>{
     const updateContact = contact =>{
       dispatch({type:UPDATE_CONTACT,payload:contact})
     }
+    
     // Filter Contacts
+    const filterContacts = filtered =>{
+      dispatch({type:FILTER_CONTACTS, payload:filtered})
+    }
 
-    // Clear Contacts
+    // Filter Contacts
+    const clearFilter = () =>{
+      dispatch({type:CLEAR_FILTER})
+    }
 
     return (
         <ContactContext.Provider
           value={{
             contacts: state.contacts,
             current: state.current,
+            filtered: state.filtered,
             addContact,
             updateContact,
             deleteContact,
             setCurrent,
-            clearCurrent
+            clearCurrent,
+            filterContacts,
+            clearFilter
           }}
         >
           {props.children}
