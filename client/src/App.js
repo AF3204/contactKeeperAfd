@@ -8,9 +8,16 @@ import About from './components/pages/About'
 // Contact
 import ContactState from './context/contact/ContactState';
 
+// Auth
+import AuthState from './context/auth/AuthState';
+
 const App=()=>{
+  /**
+   * 20210816 - Added the Auth 
+   */
   return (
-    <ContactState>
+    <AuthState>
+      <ContactState>
       <Router>
         <Fragment>
           <Navbar/>
@@ -22,6 +29,8 @@ const App=()=>{
           
       </Router>
     </ContactState>
+    </AuthState>
+    
   );
 }
 
