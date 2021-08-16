@@ -18,8 +18,7 @@ const Contacts = () => {
     if(contacts.length === 0){
         return <h4>Please add contact</h4>
     }
-    // contact=>(
-    //     <ContactItem key={contact.id} contact={contact}/>
+    
     return (
         <Fragment>
             <div>
