@@ -11,6 +11,12 @@ import ContactState from './context/contact/ContactState';
 // Auth
 import AuthState from './context/auth/AuthState';
 
+// Reverted on this day=> 20210823: AlertState
+import AlertState from './context/alert/AlertState'
+import Alerts from './components/layout/Alerts.js'
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+
 const App=()=>{
   /**
    * 20210816 - Added the Auth 
@@ -18,17 +24,22 @@ const App=()=>{
   return (
     <AuthState>
       <ContactState>
-      <Router>
-        <Fragment>
-          <Navbar/>
-        </Fragment>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route exact path='/about' component={About}/>
-        </Switch>
-          
-      </Router>
-    </ContactState>
+      <AlertState>
+        <Router>
+          <Fragment>
+            <Navbar/>
+          </Fragment>
+          <Alerts/>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route exact path='/about' component={About}/>
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+          </Switch>
+            
+        </Router>
+      </AlertState>
+      </ContactState>
     </AuthState>
     
   );
