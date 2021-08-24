@@ -79,8 +79,9 @@ const AuthState = (props) =>{
         // Upon Success
         dispatch({
           type:REGISTER_SUCCESS,
-          payload: res
+          payload: res.data
         })
+        loadUser()
       }catch(err){
         // Using ID to get the error messages
         console.log(err.response.data.id)
@@ -91,13 +92,29 @@ const AuthState = (props) =>{
           payload: err.response.data.id
         })
       }
-
-      loadUser()
     }
 
     // Login User
-    const login = () =>{
-
+    const login = async formData =>{
+      try{
+        // Format for axios: url, forms/information, configuation
+        const res = await axios.post('/api/auth', formData,config);
+        // Upon Success
+        dispatch({
+          type:LOGIN_SUCCESS,
+          payload: res.data
+        })
+        loadUser()
+      }catch(err){
+        // Using ID to get the error messages
+        console.log(err.response.data)
+        
+        // Upon Failure
+        dispatch({
+          type:LOGIN_FAIL,
+          payload: err.response.data
+        })
+      }
     }
 
     // Logout

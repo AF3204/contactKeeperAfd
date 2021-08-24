@@ -19,6 +19,7 @@ export default(state,action)=>{
                 loading:false
             }
         case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
             /**
              * For success, we have the token stored in the localStorage
              * For loading, it will now give true to show completion

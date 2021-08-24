@@ -81,9 +81,9 @@ async(req, res)=>{
         await user.save()
 
         // 20210727: Creating payload
-        const payload ={
-            user:{
-                id:user.id
+        const payload = {
+            user: {
+                id: user.id,
             }
         }
 
@@ -91,7 +91,7 @@ async(req, res)=>{
         jwt.sign(payload,
                  config.get('jwt'),
                  {
-                    expiresIn: 3600
+                    expiresIn: 360000
                  },
                  (err,token)=>{
                     //  If error

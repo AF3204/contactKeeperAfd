@@ -89,7 +89,7 @@ router.post('/',
             payload,
             config.get('jwt'),
             {
-            expiresIn: 3600
+            expiresIn: 360000
             },
             (err,token)=>{
             //  If error
