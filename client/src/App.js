@@ -28,15 +28,16 @@ const App=()=>{
         <Router>
           <Fragment>
             <Navbar/>
+            <div className='container'>
+            <Alerts/>
+            <Switch>
+              <Route exact path='/' component={Home}/>
+              <Route exact path='/about' component={About}/>
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+            </Switch>  
+            </div>
           </Fragment>
-          <Alerts/>
-          <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route exact path='/about' component={About}/>
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
-          </Switch>
-            
         </Router>
       </AlertState>
       </ContactState>
