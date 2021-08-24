@@ -36,6 +36,7 @@ router.post('/',
             .isEmpty(),
     ],
     async (req, res)=>{
+        console.log('Hit in the server')
         // 20210802: Validating the results
         const errors = validationResult(req)
         

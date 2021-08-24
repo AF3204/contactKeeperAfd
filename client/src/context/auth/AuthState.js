@@ -34,28 +34,53 @@ const AuthState = (props) =>{
     const [state, dispatch] = useReducer(authReducer, initialState)
     
     // Load User
+    const loadUser = () =>{
+
+    }
 
     // Register User
     const register = async formData =>{
       const config ={
         headers:{
-          'Content-Type':'application/json'
-        }
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        baseURL: 'https://localhost:5050/',
       }
 
       try{
         // Format for axios: url, forms/information, configuation
-        const res = await axios.post('/api/users', formData,config)
+        const res = await axios.post('/api/users', formData,config);
+        console.log(res)
+        // Upon Success
+        dispatch({
+          type:REGISTER_SUCCESS,
+          payload: res
+        })
       }catch(err){
         console.log(err)
+        // Upon Failure
+        dispatch({
+          type:REGISTER_FAIL,
+          payload: err.message
+        })
       }
     }
 
     // Login User
+    const login = () =>{
+
+    }
 
     // Logout
+    const logout = () =>{
+
+    }
 
     // Clear Errors
+    const clearError = () =>dispatch({
+      type: CLEAR_ERRORS
+    })
 
     return (
         <AuthContext.Provider
@@ -64,7 +89,12 @@ const AuthState = (props) =>{
             isAuthenticated: state.isAuthenticated,
             loading:state.loading,
             user: state.user,
-            error:state.error
+            error:state.error,
+            register,
+            loadUser,
+            login,
+            logout,
+            clearError
           }}
         >
           {props.children}

@@ -4,6 +4,7 @@
  */
 const express = require('express')
 const connectDB = require('./config/db.js')
+const cors = require('cors')
 
 // Initialising the app
 const app = express()
@@ -15,6 +16,10 @@ connectDB()
 
 // 20210727: Init middleware
 app.use(express.json({extended: false}));
+
+// 20210824: adding in the Cors
+app.use(cors())
+
 
 // First GET request
 app.get('/',(req, res)=>{
