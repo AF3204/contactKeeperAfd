@@ -17,6 +17,14 @@ import Alerts from './components/layout/Alerts.js'
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
+// Importing the token
+import setAuthToken from './utils/setAuthToken';
+
+// Want this to load in our main component every single time
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
+
 const App=()=>{
   /**
    * 20210816 - Added the Auth 

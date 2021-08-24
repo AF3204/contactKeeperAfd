@@ -18,6 +18,9 @@ connectDB()
 app.use(express.json({extended: false}));
 
 // 20210824: adding in the Cors
+const corsConfig={
+    origin: '*'
+}
 app.use(cors())
 
 

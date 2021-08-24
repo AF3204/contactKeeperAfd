@@ -10,16 +10,22 @@ const Register = props => {
     const { setAlert } = alertContext;
 
     // Destructuring from authContext
-    const { register, error, clearError } = authContext;
+    const { register, error, clearError, isAuthenticated } = authContext;
 
     // Read up again on useEffect
     useEffect(()=>{
+      // If authenticated
+      if(isAuthenticated){
+        props.history.push('/')
+      }
+
       if(error === 1){
         console.log(name)
         setAlert(`Username ${name} has been created`, 'danger')
         clearError()
       }
-    },[error])
+      // eslint-disable-next-line
+    },[error, isAuthenticated, props.history])
   
     const [user, setUser] = useState({
       name: '',

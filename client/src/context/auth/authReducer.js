@@ -11,6 +11,13 @@ import {
 
 export default(state,action)=>{
     switch(action.type){
+        case USER_LOADED:
+            return{
+                ...state,
+                user: action.payload,
+                isAuthenticated:true,
+                loading:false
+            }
         case REGISTER_SUCCESS:
             /**
              * For success, we have the token stored in the localStorage
@@ -24,11 +31,14 @@ export default(state,action)=>{
                 isAuthenticated:true 
             }
         case REGISTER_FAIL:
+        case AUTH_ERROR:
+            // 20210824: Added in Auth Error since both will respond the same
             /**
              * If failed, remove the token
              * Null the user to allow for new entries
              * Error: take from the payload to show what is the error
              */
+            localStorage.removeItem('token')
             return{
                 ...state,
                 token: null,

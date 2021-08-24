@@ -3,6 +3,10 @@ import {v4 as uuid} from 'uuid'
 import AuthContext from './authContext'
 import authReducer from './authReducer'
 import axios from 'axios'
+
+// Calling the token setting
+import setAuthToken from '../../utils/setAuthToken'
+
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
@@ -32,22 +36,43 @@ const AuthState = (props) =>{
     // console.log(initialState.current);
 
     const [state, dispatch] = useReducer(authReducer, initialState)
+
+    // Configuration for Axios. 
+    // @todo Make sure the Axios can be made global
+    const config ={
+      headers:{
+        'Content-Type':'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      baseURL: 'http://localhost:5050/',
+    }
     
     // Load User
-    const loadUser = () =>{
+    const loadUser = async () =>{
+      try {
+        // If token exist
+        if(localStorage.token){
+          setAuthToken(localStorage.token)
+        }
 
+        const res = await axios.get('api/auth')
+
+        dispatch({
+          type:USER_LOADED,
+          payload: res.data
+        })
+      } catch (error) {
+        console.log(error)
+        dispatch({
+          type:AUTH_ERROR,
+          payload: error.response
+        })
+      }
     }
 
     // Register User
     const register = async formData =>{
-      const config ={
-        headers:{
-          'Content-Type':'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        baseURL: 'http://localhost:5050/',
-      }
-
+      
       try{
         // Format for axios: url, forms/information, configuation
         const res = await axios.post('/api/users', formData,config);
@@ -66,6 +91,8 @@ const AuthState = (props) =>{
           payload: err.response.data.id
         })
       }
+
+      loadUser()
     }
 
     // Login User
@@ -86,11 +113,11 @@ const AuthState = (props) =>{
     return (
         <AuthContext.Provider
           value={{
-            token:state.token,
+            token: state.token,
             isAuthenticated: state.isAuthenticated,
-            loading:state.loading,
+            loading: state.loading,
             user: state.user,
-            error:state.error,
+            error: state.error,
             register,
             loadUser,
             login,
