@@ -59,7 +59,8 @@ async(req, res)=>{
         
         if(user){
             return res.status(400).json({
-                msg: `Email ${email} has already been used`
+                msg: `Email ${email} has already been used`,
+                id: 1
             })
         }
 

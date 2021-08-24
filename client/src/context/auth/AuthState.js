@@ -45,24 +45,25 @@ const AuthState = (props) =>{
           'Content-Type':'application/json',
           'Access-Control-Allow-Origin': '*'
         },
-        baseURL: 'https://localhost:5050/',
+        baseURL: 'http://localhost:5050/',
       }
 
       try{
         // Format for axios: url, forms/information, configuation
         const res = await axios.post('/api/users', formData,config);
-        console.log(res)
         // Upon Success
         dispatch({
           type:REGISTER_SUCCESS,
           payload: res
         })
       }catch(err){
-        console.log(err)
+        // Using ID to get the error messages
+        console.log(err.response.data.id)
+        
         // Upon Failure
         dispatch({
           type:REGISTER_FAIL,
-          payload: err.message
+          payload: err.response.data.id
         })
       }
     }

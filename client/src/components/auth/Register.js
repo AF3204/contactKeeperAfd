@@ -14,8 +14,9 @@ const Register = props => {
 
     // Read up again on useEffect
     useEffect(()=>{
-      if(error === 'User already exists'){
-        setAlert(error, 'danger')
+      if(error === 1){
+        console.log(name)
+        setAlert(`Username ${name} has been created`, 'danger')
         clearError()
       }
     },[error])
