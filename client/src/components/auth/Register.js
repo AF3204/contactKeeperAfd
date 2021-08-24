@@ -36,12 +36,8 @@ const Register = props => {
       if (name === '' || email === '' || password === '') {
         setAlert('Please enter all fields', 'danger');
       } else if (password !== password2) {
-        console.log(password)
-        console.log(password2)
         setAlert('Passwords do not match', 'danger');
-        console.log('Hits')
       }else{
-        console.log(name)
         register({
           name, email, password
         })
