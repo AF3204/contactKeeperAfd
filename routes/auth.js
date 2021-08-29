@@ -65,7 +65,7 @@ router.post('/',
         
         if(!user){
             return res.status(400).json({
-                msg: `Invalid Email`
+                msg: `Invalid Credentials`
             })
         }
 
@@ -74,7 +74,7 @@ router.post('/',
 
         if(!isMatch){
             return res.status(400).json({
-                msg: `Invalid Password`
+                msg: `Invalid Credentials`
             })
         }
 

@@ -33,6 +33,7 @@ export default(state,action)=>{
             }
         case REGISTER_FAIL:
         case AUTH_ERROR:
+        case LOGIN_FAIL:
             // 20210824: Added in Auth Error since both will respond the same
             /**
              * If failed, remove the token
@@ -47,7 +48,6 @@ export default(state,action)=>{
                 loading: false,
                 user: null,
                 error: action.payload
-
             }
         case CLEAR_ERRORS:
             return{
