@@ -20,6 +20,9 @@ import Register from './components/auth/Register';
 // Importing the token
 import setAuthToken from './utils/setAuthToken';
 
+// 20210829 : Addding in the PrivateRoute
+import PrivateRoute from './components/routing/PrivateRoute';
+
 // Want this to load in our main component every single time
 if(localStorage.token){
   setAuthToken(localStorage.token)
@@ -40,7 +43,7 @@ const App=()=>{
             <div className='container'>
             <Alerts/>
             <Switch>
-              <Route exact path='/' component={Home}/>
+              <PrivateRoute exact path='/' component={Home}/>
               <Route exact path='/about' component={About}/>
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />

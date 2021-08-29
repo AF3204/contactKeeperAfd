@@ -117,10 +117,10 @@ const AuthState = (props) =>{
       }
     }
 
-    // Logout
-    const logout = () =>{
-
-    }
+    // Logout - Dispatch to the reducer; No payload
+    const logout = () =>dispatch({
+      type: LOGOUT
+    })
 
     // Clear Errors
     const clearError = () =>dispatch({
