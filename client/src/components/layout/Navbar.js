@@ -2,18 +2,24 @@ import React, {useContext, Fragment} from "react";
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import ContactContext from '../../context/contact/contactContext'
+
 
 const Navbar = ({title, icon}) =>{
 
     // Call the context
     const authContext = useContext(AuthContext)
+    // 20210902 - Clearing the users contact list
+    const contactContext = useContext(ContactContext)
 
     // Deconstruct
     const {isAuthenticated, logout, user} = authContext
+    const {clearContact} = contactContext
 
     // Creating logout
     const onLogout = () =>{
         logout()
+        clearContact()
     }
     /**
      * Since mine is msg-> so the response is user.msg

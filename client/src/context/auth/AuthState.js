@@ -112,7 +112,7 @@ const AuthState = (props) =>{
         // Upon Failure
         dispatch({
           type:LOGIN_FAIL,
-          payload: err.response.data
+          payload: err.response.data.msg
         })
       }
     }

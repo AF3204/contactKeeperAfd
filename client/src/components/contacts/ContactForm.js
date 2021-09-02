@@ -61,17 +61,18 @@ const ContactForm = () => {
         // 20210806 - Update if current is not null
         if(current !== null){
             updateContact(contact)
-            clearCurrent()
+            // clearCurrent()
         }else{
             addContact(contact)
         }
+        clearCurrent();
         // Once send, we reset
-        setContact({
-            name:'',
-            email:'',
-            phone:'',
-            type:'personal'
-        })
+        // setContact({
+        //     name:'',
+        //     email:'',
+        //     phone:'',
+        //     type:'personal'
+        // })
     }
 
     return (
